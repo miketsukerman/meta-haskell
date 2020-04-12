@@ -11,14 +11,17 @@ SRC_URI[sha256sum] = "b77c8a1270767c64e2adb21a6e91ee7cd904ba17edae17bc20fd03da52
 
 S = "${WORKDIR}/alex-${PV}"
 
+inherit haskell
+
 BBCLASSEXTEND = "native nativesdk" 
 
 do_configure() {
-    which ghc
     ghc -threaded --make Setup
     ${S}/Setup configure --global \
                          --bindir=${D}${bindir} \
                          --libdir=${D}${libdir} \ 
+                         --sysconfdir=${D}${datadir} \
+                         --package-db=${HASKELL_PACKAGES} \
                          --prefix=${D} 
 }
 
@@ -28,6 +31,7 @@ do_compile() {
 
 do_install() {
     ${S}/Setup install
+    ${S}/Setup register
 }
 
 FILES_${PN} += "${datadir}/*"

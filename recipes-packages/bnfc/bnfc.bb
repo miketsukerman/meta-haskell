@@ -11,6 +11,8 @@ SRC_URI = "git://github.com/BNFC/bnfc.git;protocol=https;branch=master"
 
 S = "${WORKDIR}/git/source"
 
+inherit haskell
+
 BBCLASSEXTEND = "native nativesdk" 
 
 do_configure() {
@@ -18,13 +20,16 @@ do_configure() {
     ${S}/Setup configure --global \
                          --bindir=${D} \
                          --libdir=${D} \ 
+                         --sysconfdir=${D}${datadir} \
+                         --package-db=${HASKELL_PACKAGES} \
                          --prefix=${D} 
 }
 
 do_compile() {
-    ${S}/Setup build
+    ${S}/Setup build -v
 }
 
 do_install() {
     ${S}/Setup install
+    ${S}/Setup register
 }

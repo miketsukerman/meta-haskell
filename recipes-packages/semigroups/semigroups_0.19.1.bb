@@ -12,11 +12,15 @@ S = "${WORKDIR}/git"
 
 BBCLASSEXTEND = "native nativesdk" 
 
+inherit haskell
+
 do_configure() {
     ghc -threaded --make Setup
     ${S}/Setup configure --global \
                          --bindir=${D} \
                          --libdir=${D} \ 
+                         --sysconfdir=${D}${datadir} \
+                         --package-db=${HASKELL_PACKAGES} \
                          --prefix=${D} 
 }
 
@@ -26,4 +30,5 @@ do_compile() {
 
 do_install() {
     ${S}/Setup install
+    ${S}/Setup register
 }
