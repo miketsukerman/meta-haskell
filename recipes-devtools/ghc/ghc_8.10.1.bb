@@ -1,13 +1,10 @@
 DESCRIPTION = "The Glorious Glasgow Haskell Compilation System"
-PV = "8.8.2"
-PR = "r0"
-
 LICENSE = "GHC"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=7cb08deb79c4385547f57d6bb2864e0f"
 
 SRC_URI = "https://downloads.haskell.org/~${BPN}/${PV}/${BPN}-${PV}-x86_64-deb9-linux.tar.xz"
-SRC_URI[md5sum] = "f2fa48668602663450c75235912faeb5"
-SRC_URI[sha256sum] = "7b2d66c2d5d8c15750da5833d3018634a5eb792a5662282e3abfeb112c2a1cc3"
+SRC_URI[md5sum] = "3d886e9b304d36efb8a71f706dbd8ffa"
+SRC_URI[sha256sum] = "d1cf7886f27af070f3b7dbe1975a78b43ef2d32b86362cbe953e79464fe70761"
 
 S = "${WORKDIR}/${BPN}-${PV}"
 
