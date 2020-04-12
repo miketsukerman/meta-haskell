@@ -14,8 +14,12 @@ S = "${WORKDIR}/alex-${PV}"
 BBCLASSEXTEND = "native nativesdk" 
 
 do_configure() {
+    which ghc
     ghc -threaded --make Setup
-    ${S}/Setup configure --bindir=${D} --libdir=${D} --user --prefix=${D}
+    ${S}/Setup configure --global \
+                         --bindir=${D}${bindir} \
+                         --libdir=${D}${libdir} \ 
+                         --prefix=${D} 
 }
 
 do_compile() {

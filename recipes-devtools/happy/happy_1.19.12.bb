@@ -15,7 +15,10 @@ BBCLASSEXTEND = "native nativesdk"
 
 do_configure() {
     ghc -threaded --make Setup
-    ${S}/Setup configure --user --prefix=${D}
+    ${S}/Setup configure --global \
+                         --bindir=${D}${bindir} \
+                         --libdir=${D}${libdir} \ 
+                         --prefix=${D} 
 }
 
 do_compile() {
