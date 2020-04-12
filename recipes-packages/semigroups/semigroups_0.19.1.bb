@@ -10,25 +10,6 @@ SRC_URI = "git://github.com/ekmett/semigroups.git;protocol=https;tag=v${PV}"
 
 S = "${WORKDIR}/git"
 
+inherit haskell haskell-package
+
 BBCLASSEXTEND = "native nativesdk" 
-
-inherit haskell
-
-do_configure() {
-    ghc -threaded --make Setup
-    ${S}/Setup configure --global \
-                         --bindir=${D} \
-                         --libdir=${D} \ 
-                         --sysconfdir=${D}${datadir} \
-                         --package-db=${HASKELL_PACKAGES} \
-                         --prefix=${D} 
-}
-
-do_compile() {
-    ${S}/Setup build
-}
-
-do_install() {
-    ${S}/Setup install
-    ${S}/Setup register
-}

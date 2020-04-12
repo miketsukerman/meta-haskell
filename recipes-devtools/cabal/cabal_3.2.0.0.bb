@@ -11,25 +11,6 @@ SRC_URI[sha256sum] = "a0555e895aaf17ca08453fde8b19af96725da8398e027aa43a49c1658a
 
 S = "${WORKDIR}/cabal-install-${PV}"
 
-inherit haskell
+inherit haskell haskell-package
 
 BBCLASSEXTEND = "native nativesdk" 
-
-do_configure() {
-    which ghc
-    ghc -threaded --make Setup
-    ${S}/Setup configure --global \
-                         --bindir=${D}${bindir} \
-                         --libdir=${D}${libdir} \ 
-                         --sysconfdir=${D}${datadir} \
-                         --package-db=${HASKELL_PACKAGES} \
-                         --prefix=${D} 
-}
-
-do_compile() {
-    ${S}/Setup build
-}
-
-do_install() {
-    ${S}/Setup install
-}

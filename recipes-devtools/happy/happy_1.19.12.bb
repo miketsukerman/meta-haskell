@@ -11,25 +11,6 @@ SRC_URI[sha256sum] = "fb9a23e41401711a3b288f93cf0a66db9f97da1ce32ec4fffea4b78a0d
 
 S = "${WORKDIR}/happy-${PV}"
 
-inherit haskell
+inherit haskell haskell-package
 
 BBCLASSEXTEND = "native nativesdk" 
-
-do_configure() {
-    ghc -threaded --make Setup
-    ${S}/Setup configure --global \
-                         --bindir=${D}${bindir} \
-                         --libdir=${D}${libdir} \ 
-                         --sysconfdir=${D}${datadir} \
-                         --package-db=${HASKELL_PACKAGES} \
-                         --prefix=${D} 
-}
-
-do_compile() {
-    ${S}/Setup build
-}
-
-do_install() {
-    ${S}/Setup install
-    ${S}/Setup register
-}
