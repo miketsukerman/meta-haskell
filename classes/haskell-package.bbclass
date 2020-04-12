@@ -1,5 +1,7 @@
 inherit haskell
 
+DEPENDS += "ghc"
+
 do_configure() {
     ghc -threaded --make Setup
     ${S}/Setup configure --global \
