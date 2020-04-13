@@ -1,0 +1,12 @@
+DESCRIPTION = "This is the Haskell HTTP and Browser module package"
+SECTION = "devel"
+LICENSE = "BSD3"
+LIC_FILES_CHKSUM ?= "file://${COMMON_LICENSE_DIR}/GPL-2.0;md5=801f80980d171dd6425610833a22dbe6"
+
+SRC_URI = "git://github.com/haskell/HTTP.git;protocol=https;tag=${PV}"
+
+S = "${WORKDIR}/git"
+
+inherit haskell haskell-package
+
+BBCLASSEXTEND = "native nativesdk" 
